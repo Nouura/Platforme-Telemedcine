@@ -11,4 +11,5 @@ public interface RendezVousService {
     RendezVous getRendezVousById(Long id);
     void deleteRendezVous(Long id);
     RendezVous updateRendezVous(RendezVous rendezVous);
+    List<RendezVous> getAllRendezVous();
 }

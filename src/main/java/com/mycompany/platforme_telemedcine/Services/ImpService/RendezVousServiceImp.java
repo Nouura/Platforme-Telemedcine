@@ -37,4 +37,9 @@ public class RendezVousServiceImp implements RendezVousService {
     public RendezVous updateRendezVous(RendezVous rendezVous) {
         return rendezVousRepository.save(rendezVous);
     }
+
+    @Override
+    public List<RendezVous> getAllRendezVous() {
+        return rendezVousRepository.findAll();
+    }
 }
