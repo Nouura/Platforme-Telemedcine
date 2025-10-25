@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,20 +34,26 @@ public class RendezVousController {
         return "all_RendezVous";
     }
 
-    @RequestMapping("/editRendezVous/{id}")
+    @GetMapping("/editRendezVous/{id}")
     public String showupdateRendezVous(@PathVariable("id") Long id, Model model) {
         RendezVous rendezVous = rendezVousService.getRendezVousById(id);
         model.addAttribute("rendezVous", rendezVous);
         return "update_RendezVous";
     }
 
-    @RequestMapping("/updateRendezVous/{id}")
+    @PostMapping("/updateRendezVous/{id}")
     public String updateRendezVous(@PathVariable("id") Long id, RendezVous rendezVous, BindingResult result, Model model) {
         if (result.hasErrors()) {
             rendezVous.setId(id);
             return "update_RendezVous";
         }
         rendezVousService.updateRendezVous(rendezVous);
+        return "redirect:/all_RendezVous";
+    }
+
+    @GetMapping("/deleteRendezVous/{id}")
+    public String deleteRendezVous(@PathVariable("id") Long id) {
+        rendezVousService.deleteRendezVous(id);
         return "redirect:/all_RendezVous";
     }
 }

@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,14 +35,14 @@ public class UserContoller {
         return "all_Users";
     }
 
-    @RequestMapping("/editUser/{id}")
+    @GetMapping("/editUser/{id}")
     public String showupdateUser(@PathVariable("id") Long id, Model model) {
         User user = userService.getUser(id);
         model.addAttribute("user", user);
         return "update_User";
     }
 
-    @RequestMapping("/updateUser/{id}")
+    @PostMapping("/updateUser/{id}")
     public String updateUser(@PathVariable("id") Long id, User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             user.setId(id);
@@ -54,4 +51,11 @@ public class UserContoller {
         userService.updateUser(user);
         return "redirect:/all_Users";
     }
+
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
+        return "redirect:/all_Users";
+    }
+
 }
