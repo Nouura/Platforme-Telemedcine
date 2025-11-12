@@ -11,7 +11,5 @@ import java.util.Date;
 public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
     RendezVous findRendezVousById(Long id);
     RendezVous findRendezVousByDate(Date date);
-    RendezVous findByMedecin(String medecin);
-
     RendezVous findByMedecin(Medecin medecin);
 }

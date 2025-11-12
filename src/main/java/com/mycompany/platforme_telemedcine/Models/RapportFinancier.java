@@ -15,7 +15,7 @@ public class RapportFinancier {
     @ManyToOne
     private Administrateur administrateur;
 
-    @OneToMany(mappedBy = "rapportFinancier", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "rapportFinancier")
     private List<Paiement> paiements;
 
     public Long getId() { return id; }

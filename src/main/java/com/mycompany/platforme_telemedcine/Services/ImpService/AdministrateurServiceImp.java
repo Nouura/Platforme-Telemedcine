@@ -20,4 +20,14 @@ public class AdministrateurServiceImp implements AdministrateurService {
     public Administrateur updateAdministrateur(Administrateur administrateur) {
         return administrateurRepository.save(administrateur);
     }
+
+    @Override
+    public Administrateur getAdministrateurById(Long id) {
+        return administrateurRepository.findById(id).get();
+    }
+
+    @Override
+    public void deleteAdministrateurById(Long id) {
+        this.administrateurRepository.deleteById(id);
+    }
 }

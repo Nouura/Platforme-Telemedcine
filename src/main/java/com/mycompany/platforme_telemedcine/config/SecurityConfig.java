@@ -1,10 +1,7 @@
-package com.mycompany.platforme_telemedcine.config;
-import org.springframework.context.annotation.Bean;
+/* import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class SecurityConfig {
@@ -12,27 +9,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> {}) // utilise ton bean corsConfigurer()
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // disable CSRF for testing
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
-                        .requestMatchers(
-                                ""
-                        ).permitAll()
+                        .requestMatchers("/api/users/**").permitAll() // allow your endpoint
+                        .anyRequest().authenticated()
                 );
+
         return http.build();
     }
-
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:5173")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowCredentials(true);
-            }
-        };
-    }
 }
+*/
