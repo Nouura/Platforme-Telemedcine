@@ -1,5 +1,6 @@
 package com.mycompany.platforme_telemedcine.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -12,9 +13,7 @@ public class RapportFinancier {
     private String priode;
     private double montantTotal;
 
-    @ManyToOne
-    private Administrateur administrateur;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "rapportFinancier")
     private List<Paiement> paiements;
 
@@ -26,9 +25,6 @@ public class RapportFinancier {
 
     public double getMontantTotal() { return montantTotal; }
     public void setMontantTotal(double montantTotal) { this.montantTotal = montantTotal; }
-
-    public Administrateur getAdministrateur() { return administrateur; }
-    public void setAdministrateur(Administrateur administrateur) { this.administrateur = administrateur; }
 
     public List<Paiement> getPaiements() { return paiements; }
     public void setPaiements(List<Paiement> paiements) { this.paiements = paiements; }

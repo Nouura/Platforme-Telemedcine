@@ -1,5 +1,4 @@
 package com.mycompany.platforme_telemedcine.RestControllers;
-
 import com.mycompany.platforme_telemedcine.Models.Patient;
 import com.mycompany.platforme_telemedcine.Services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +49,8 @@ public class PatientRestController {
         Patient p1 = patientService.getPatientById(id);
         if(p1 != null) {
             patient.setId(id);
-            patientService.updatePatient(p1);
-            return new ResponseEntity<>(p1, HttpStatus.OK);
+            patientService.updatePatient(patient);
+            return new ResponseEntity<>(patient, HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

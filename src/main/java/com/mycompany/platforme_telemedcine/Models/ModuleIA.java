@@ -1,5 +1,6 @@
 package com.mycompany.platforme_telemedcine.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,7 @@ public class ModuleIA {
     private String resultat;
 
     // lahne lezmni nes2el
+    @JsonIgnore
     @OneToOne
     private Patient patient;
 

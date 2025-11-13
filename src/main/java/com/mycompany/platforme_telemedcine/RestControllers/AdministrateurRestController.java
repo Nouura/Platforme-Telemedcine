@@ -29,7 +29,7 @@ public class AdministrateurRestController {
         Administrateur admin = administrateurService.getAdministrateurById(id);
         if (admin != null) {
             administrateur.setId(id);
-            administrateurService.updateAdministrateur(admin);
+            administrateurService.updateAdministrateur(administrateur);
             return new ResponseEntity<>(admin, HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

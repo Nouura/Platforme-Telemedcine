@@ -1,5 +1,6 @@
 package com.mycompany.platforme_telemedcine.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -9,6 +10,8 @@ import java.util.List;
 public class Medecin extends User{
     private String specialte;
     private String disponibilite;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "medecin")
     private List<RendezVous> rendezVous ;
 

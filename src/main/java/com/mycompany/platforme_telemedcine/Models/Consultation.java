@@ -1,5 +1,6 @@
 package com.mycompany.platforme_telemedcine.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -13,8 +14,10 @@ public class Consultation {
     private String notes;
     private String videoURL;
 
+    @JsonIgnore
     @OneToOne
     RendezVous rendezVous;
+    @JsonIgnore
     @OneToOne
     Ordonance ordonance;
 

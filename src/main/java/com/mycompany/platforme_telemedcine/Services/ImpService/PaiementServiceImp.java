@@ -31,7 +31,7 @@ public class PaiementServiceImp implements PaiementService {
 
     @Override
     public Paiement updatePaiement(Paiement paiement) {
-        this.paiementRepository.save(paiement);
+       return paiementRepository.save(paiement);
     }
 
     @Override

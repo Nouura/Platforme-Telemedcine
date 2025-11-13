@@ -1,5 +1,6 @@
 package com.mycompany.platforme_telemedcine.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -12,16 +13,21 @@ public class Patient extends User{
     private Date dataNaissance;
     private String adresse;
     private String antecedentsMedicaux;
+    @JsonIgnore
     @OneToMany(mappedBy = "patient")
     List<Chatbot> chatbots;
+    @JsonIgnore
     @OneToMany(mappedBy = "patient")
     List<RendezVous> rendezVous;
+    @JsonIgnore
     @OneToMany(mappedBy = "patient")
     List<DossierMedical> dossierMedicals;
+    @JsonIgnore
     @OneToMany(mappedBy = "patient")
     List<Paiement> paiements;
 
     // lezmni nes2el
+    @JsonIgnore
     @OneToOne
     ModuleIA moduleIA;
 

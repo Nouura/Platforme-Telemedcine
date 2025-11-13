@@ -1,17 +1,21 @@
 package com.mycompany.platforme_telemedcine.Models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Ordonance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String medecaments;
+    @ElementCollection
+    private List<String> medicaments;
     private Date dateCreation;
     private Boolean valideeParIA;
 
+    @JsonIgnore
     @OneToOne
     Consultation consultation;
 
@@ -23,12 +27,12 @@ public class Ordonance {
         this.id = id;
     }
 
-    public String getMedecaments() {
-        return medecaments;
+    public List<String> getMedicaments() {
+        return medicaments;
     }
 
-    public void setMedecaments(String medecaments) {
-        this.medecaments = medecaments;
+    public void setMedicaments(List<String> medicaments) {
+        this.medicaments = medicaments;
     }
 
     public Date getDateCreation() {

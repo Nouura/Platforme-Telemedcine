@@ -26,14 +26,28 @@ public class PaiementRestController {
     @Autowired
     RapportFinancierService rapportFinancierService;
 
-    @PostMapping("/add/{patientId}/{RapportFinanicierId}")
-    public ResponseEntity<Paiement> addPaiement(@PathVariable Long patientId, @PathVariable Long RapportFinanicierId, @RequestBody Paiement paiement) {
+
+    @PostMapping("/add/{patientId}")
+    public ResponseEntity<Paiement> addPaiement(@PathVariable Long patientId, @RequestBody Paiement paiement) {
+        try {
+            Patient p1 = patientService.getPatientById(patientId);
+            paiement.setPatient(p1);
+            Paiement paiement1 = paiementService.createPaiement(paiement);
+            return new ResponseEntity<>(paiement1, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/add2/{patientId}/{RapportFinanicierId}")
+    public ResponseEntity<Paiement> addPaiement2(@PathVariable Long patientId, @PathVariable Long RapportFinanicierId, @RequestBody Paiement paiement) {
         try {
             Patient p1 = patientService.getPatientById(patientId);
             RapportFinancier f1 = rapportFinancierService.getRapportFinancierById(RapportFinanicierId);
             paiement.setRapportFinancier(f1);
             paiement.setPatient(p1);
-            return new ResponseEntity<>(paiement, HttpStatus.CREATED);
+            Paiement paiement1 = paiementService.createPaiement(paiement);
+            return new ResponseEntity<>(paiement1, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -59,16 +73,26 @@ public class PaiementRestController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Paiement> updatePaiement(@PathVariable Long id, @RequestBody Paiement paiement) {
-        Paiement paiement1 = paiementService.getPaiementById(id);
-        if (paiement1!=null) {
-            paiement.setId(id);
-            paiementService.updatePaiement(paiement);
-            return new ResponseEntity<>(paiement, HttpStatus.OK);
-        } else {
+        Paiement p1 = paiementService.getPaiementById(id);
+        if (p1 == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } if (paiement.getMontant()!= null){
+            p1.setMontant(paiement.getMontant());
         }
+        if (paiement.getDatePaiement() != null) {
+            p1.setDatePaiement(paiement.getDatePaiement());
+        }
+        if(paiement.getStatus()!= null){
+            p1.setStatus(paiement.getStatus());
+        }
+        if(paiement.getFactureURL()!= null){
+            p1.setFactureURL(paiement.getFactureURL());
+        }
+
+        Paiement updated = paiementService.updatePaiement(p1);
+        return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
